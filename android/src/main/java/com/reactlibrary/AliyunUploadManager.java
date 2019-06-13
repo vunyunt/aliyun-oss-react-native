@@ -94,7 +94,11 @@ public class AliyunUploadManager {
         // init upload request
         PutObjectRequest put = new PutObjectRequest(bucketName, ossFile, sourceFile);
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("application/octet-stream");
+        if(options.hasKey("contentType")) {
+            metadata.setContentType(options.getString("contentType"));
+        } else {
+            metadata.setContentType("application/octet-stream");
+        }
         put.setMetadata(metadata);
 
         // set callback
@@ -162,7 +166,11 @@ public class AliyunUploadManager {
 
         AppendObjectRequest append = new AppendObjectRequest(bucketName, objectKey, uploadFilePath);
         ObjectMetadata metadata = new ObjectMetadata();
-        metadata.setContentType("application/octet-stream");
+        if(options.hasKey("contentType")) {
+            metadata.setContentType(options.getString("contentType"));
+        } else {
+            metadata.setContentType("application/octet-stream");
+        }
         append.setMetadata(metadata);
 
         //set appendpostions
