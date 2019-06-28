@@ -1,5 +1,12 @@
-import {DeviceEventEmitter, NativeEventEmitter, NativeModules, Platform} from "react-native";
-const {RNAliyunOSS} = NativeModules;
+import {
+    DeviceEventEmitter,
+    NativeEventEmitter,
+    NativeModules,
+    Platform
+} from "react-native";
+const {
+    RNAliyunOSS
+} = NativeModules;
 
 let subscription;
 
@@ -11,21 +18,21 @@ const conf = {
 };
 
 const imageXOssProcess = {
-    "x-oss-process":''
+    "x-oss-process": ''
 }
 
 let partSize = 128 * 1024
 const mulitpartUploadConfig = {
-    "partSize":partSize
+    "partSize": partSize
 }
 
 //appendObject
 const appendOptions = {
-    "appendPosition":0,
-    "contentType":'',
-    "contentMd5":'',
-    "contentEncoding":'',
-    "contentDisposition":''
+    "appendPosition": 0,
+    "contentType": '',
+    "contentMd5": '',
+    "contentEncoding": '',
+    "contentDisposition": ''
 }
 
 export default AliyunOSS = {
@@ -34,7 +41,7 @@ export default AliyunOSS = {
     enableDevMode() {
         RNAliyunOSS.enableDevMode();
     },
-    
+
     /**
      * Initialize the OSS Client
      * Mode: PlainTextAKSK
@@ -65,86 +72,88 @@ export default AliyunOSS = {
      */
     initWithServerSTS(server, endPoint, configuration = conf) {
         RNAliyunOSS.initWithServerSTS(server, endPoint, configuration);
-    },    
+    },
 
     /**
      * Asynchronously uploading
      */
-    asyncUpload(bucketName, objectKey, filepath,options) {
-        return RNAliyunOSS.asyncUpload(bucketName, objectKey, filepath,options);
-    },
-
-     /**
-     * Asynchronously 
-     */
-    asyncResumableUpload(bucketName, objectKey, filepath='',options={}) {
-        return RNAliyunOSS.asyncResumableUpload(bucketName, objectKey, filepath,options);
-    },
-
-     /**
-     * Asynchronously asyncAppendObject
-     */
-    asyncAppendObject(bucketName,objectKey,filepath,options = appendOptions) {
-        return RNAliyunOSS.asyncAppendObject(bucketName, objectKey, filepath,options);
+    asyncUpload(bucketName, objectKey, filepath, options = {
+        contentType: "application/octet-stream"
+    }) {
+        return RNAliyunOSS.asyncUpload(bucketName, objectKey, filepath, options);
     },
 
     /**
      * Asynchronously 
      */
-    initMultipartUpload(bucketName,objectKey) {
+    asyncResumableUpload(bucketName, objectKey, filepath = '', options = {}) {
+        return RNAliyunOSS.asyncResumableUpload(bucketName, objectKey, filepath, options);
+    },
+
+    /**
+     * Asynchronously asyncAppendObject
+     */
+    asyncAppendObject(bucketName, objectKey, filepath, options = appendOptions) {
+        return RNAliyunOSS.asyncAppendObject(bucketName, objectKey, filepath, options);
+    },
+
+    /**
+     * Asynchronously 
+     */
+    initMultipartUpload(bucketName, objectKey) {
         return RNAliyunOSS.initMultipartUpload(bucketName, objectKey);
     },
 
     /**
      * Asynchronously multipartUpload
      */
-    multipartUpload(bucketName,objectKey,uploadId,filepath ='',options = mulitpartUploadConfig) {
-        return RNAliyunOSS.multipartUpload(bucketName, objectKey, uploadId,filepath, options);
+    multipartUpload(bucketName, objectKey, uploadId, filepath = '', options = mulitpartUploadConfig) {
+        return RNAliyunOSS.multipartUpload(bucketName, objectKey, uploadId, filepath, options);
     },
 
-     /**
+    /**
      * Asynchronously listParts
      */
-    listParts (bucketName,objectKey,uploadId) {
+    listParts(bucketName, objectKey, uploadId) {
         return RNAliyunOSS.listParts(bucketName, objectKey, uploadId)
     },
-     /**
+    /**
      * Asynchronously abortMultipartUpload
      */
-    abortMultipartUpload(bucketName,objectKey,uploadId) {
+    abortMultipartUpload(bucketName, objectKey, uploadId) {
         return RNAliyunOSS.abortMultipartUpload(bucketName, objectKey, uploadId);
     },
 
     /**
      * Asynchronously downloading
      */
-    asyncDownload(bucketName, objectKey, filepath='',options = imageXOssProcess) {
-        return RNAliyunOSS.asyncDownload(bucketName, objectKey, filepath,options);
+    asyncDownload(bucketName, objectKey, filepath = '', options = imageXOssProcess) {
+        return RNAliyunOSS.asyncDownload(bucketName, objectKey, filepath, options);
     },
-    
+
     /*
     asyncListBuckets
     */
 
-    asyncListBuckets () {
+    asyncListBuckets() {
         return RNAliyunOSS.asyncListBuckets()
     },
 
-     /**
+    /**
      * Asynchronously getHeadObject
      */
 
-    asyncHeadObject (bucketName, objectKey) {
-        return RNAliyunOSS.asyncHeadObject(bucketName,objectKey)
-    }, 
+    asyncHeadObject(bucketName, objectKey) {
+        return RNAliyunOSS.asyncHeadObject(bucketName, objectKey)
+    },
 
-    
+
     /**
      * Asynchronously getAsyncObjects
      */
 
-    asyncListObjects (bucketName,options) {
-        return RNAliyunOSS.asyncListObjects(bucketName,options)
+    asyncListObjects(bucketName, options) {
+        return RNAliyunOSS.asyncListObjects(bucketName, options)
     },
 
 
@@ -152,37 +161,37 @@ export default AliyunOSS = {
      * Asynchronously asyncCopyObject
      */
 
-    asyncCopyObject (srcBucketName, srcObjectKey, desBucketName,destObjectKey, options) {
-        return RNAliyunOSS.asyncCopyObject (srcBucketName, srcObjectKey, desBucketName,destObjectKey, options)
+    asyncCopyObject(srcBucketName, srcObjectKey, desBucketName, destObjectKey, options) {
+        return RNAliyunOSS.asyncCopyObject(srcBucketName, srcObjectKey, desBucketName, destObjectKey, options)
     },
 
     /**
      * Asynchronously doesObjectExist
      */
 
-     doesObjectExist (bucketName, objectKey) {
+    doesObjectExist(bucketName, objectKey) {
         return RNAliyunOSS.doesObjectExist(bucketName, objectKey)
-     },
+    },
 
-     /**
+    /**
      * Asynchronously asyncDeleteObject
      */
 
-     asyncDeleteObject (bucketName, objectKey) {
+    asyncDeleteObject(bucketName, objectKey) {
         return RNAliyunOSS.asyncDeleteObject(bucketName, objectKey)
-     },
+    },
 
-     /**
+    /**
      * Asynchronously createBucket
      */
-    asyncCreateBucket (bucketName,acl="private",region) {
-        return RNAliyunOSS.asyncCreateBucket(bucketName,acl,region)
-    }, 
+    asyncCreateBucket(bucketName, acl = "private", region) {
+        return RNAliyunOSS.asyncCreateBucket(bucketName, acl, region)
+    },
 
     /**
      * Asynchronously getBucketACL
      */
-    asyncGetBucketACL (bucketName) {
+    asyncGetBucketACL(bucketName) {
         return RNAliyunOSS.asyncGetBucketACL(bucketName)
     },
 
@@ -196,9 +205,9 @@ export default AliyunOSS = {
     /**
      * Asynchronously deleteBucket
      */
-    asyncDeleteBucket (bucketName) {
+    asyncDeleteBucket(bucketName) {
         return RNAliyunOSS.asyncDeleteBucket(bucketName)
-    },   
+    },
 
     /**
      * event listener for native upload/download event

@@ -20,7 +20,7 @@ RCT_REMAP_METHOD(asyncUpload, asyncUploadWithBucketName:(NSString *)bucketName o
         put.uploadingData = data;
         
         // 设置Content-Type，可选
-        //        put.contentType = @"application/octet-stream";
+               put.contentType = [options objectForKey:@"contentType"];
         //        // 设置MD5校验，可选
         //        put.contentMd5 = [OSSUtil base64Md5ForFilePath:@"<filePath>"]; // 如果是文件路径
         
